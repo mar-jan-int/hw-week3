@@ -4,18 +4,18 @@ import org.springframework.stereotype.Component;
 
 public class Car {
     private long id;
+    private String mark;
     private String model;
     private String color;
-    private boolean rented;
 
     public Car() {
     }
 
-    public Car(long id, String model, String color, boolean rented) {
+    public Car(long id, String mark, String model, String color) {
         this.id = id;
+        this.mark = mark;
         this.model = model;
         this.color = color;
-        this.rented = rented;
     }
 
     public long getId() {
@@ -34,19 +34,19 @@ public class Car {
         this.model = model;
     }
 
+    public String getMark() {
+        return mark;
+    }
+
+    public void setMark(String mark) {
+        this.mark = model;
+    }
+
     public String getColor() {
         return color;
     }
 
     public void setColor(String color) {
         this.color = color;
-    }
-
-    public boolean isRented() {
-        return rented;
-    }
-
-    public void setRented(boolean rented) {
-        this.rented = rented;
     }
 }

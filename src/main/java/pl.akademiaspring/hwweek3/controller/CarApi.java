@@ -2,10 +2,7 @@ package pl.akademiaspring.hwweek3.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import pl.akademiaspring.hwweek3.model.Car;
 
 import java.util.ArrayList;
@@ -19,9 +16,9 @@ public class CarApi {
 
     public CarApi() {
         this.cars = new ArrayList<>();
-        cars.add(new Car(1L, "Fiat", "Red", true));
-        cars.add(new Car(2L, "Volvo", "Grey", false));
-        cars.add(new Car(3L, "Ford", "White", true));
+        cars.add(new Car(1L, "Fiat", "Doblo", "Red"));
+        cars.add(new Car(2L, "Volvo", "V90", "Grey"));
+        cars.add(new Car(3L, "Ford", "Mondeo", "White"));
     }
 
     @GetMapping
@@ -35,6 +32,45 @@ public class CarApi {
         if (first.isPresent()) {
             return new ResponseEntity<>(first.get(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("/{color}")
+    public ResponseEntity<Car> getCarByColor(@PathVariable String color) {
+        Optional<Car> first = cars.stream().filter(car -> car.getColor().equals(color)).findFirst();
+        if (first.isPresent()) {
+            return new ResponseEntity<>(first.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping
+    public ResponseEntity<Car> addCar(@RequestBody Car car) {
+        boolean add = cars.add(car);
+        if (add) {
+            return new ResponseEntity(HttpStatus.CREATED);
+        }
+        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @PutMapping
+    public ResponseEntity<Car> modCar(@RequestBody Car newCar) {
+        Optional<Car> first = cars.stream().filter(car -> car.getId() == newCar.getId()).findFirst();
+        if (first.isPresent()) {
+            cars.remove(first.get());
+            cars.add(newCar);
+            return new ResponseEntity<>(first.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Car> removeCarById(@PathVariable long id) {
+        Optional<Car> first = cars.stream().filter(car -> car.getId() == id).findFirst();
+        if (first.isPresent()) {
+            cars.remove(first.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

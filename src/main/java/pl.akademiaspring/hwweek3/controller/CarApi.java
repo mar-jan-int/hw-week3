@@ -36,13 +36,13 @@ public class CarApi {
     }
 
     @GetMapping("/{color}")
-    public ResponseEntity<Car> getCarByColor(@PathVariable String color) {
-        Optional<Car> first = cars.stream().filter(car -> car.getColor().equals(color)).findFirst();
-        if (first.isPresent()) {
-            return new ResponseEntity<>(first.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+//    public ResponseEntity<Car> getCarByColor(@PathVariable String color) {
+//        Optional<Car> first = cars.stream().filter(car -> car.getColor().equals(color)).findFirst();
+//        if (first.isPresent()) {
+//            return new ResponseEntity<>(first.get(), HttpStatus.OK);
+//        }
+//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//    }
 
     @PostMapping
     public ResponseEntity<Car> addCar(@RequestBody Car car) {
@@ -71,6 +71,30 @@ public class CarApi {
             cars.remove(first.get());
             return new ResponseEntity<>(HttpStatus.OK);
         }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Car> modFieldInCar(@PathVariable long id,
+                                             @RequestParam(required = false, defaultValue = "") String mark,
+                                             @RequestParam(required = false, defaultValue = "") String model,
+                                             @RequestParam(required = false, defaultValue = "") String color) {
+        Optional<Car> first = cars.stream().filter(car -> car.getId() == id).findFirst();
+        if (first.isPresent()) {
+            if(mark != ""){
+                first.get().setMark(mark);
+            }
+
+            if(model != ""){
+                first.get().setMark(model);
+            }
+
+            if(color != "") {
+                first.get().setMark(color);
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+         }
+//            return new ResponseEntity<>(HttpStatus.OK)
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

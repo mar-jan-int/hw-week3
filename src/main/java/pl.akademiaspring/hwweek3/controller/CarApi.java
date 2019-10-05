@@ -74,7 +74,7 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{id}") //patch!!!
     public ResponseEntity<Car> modFieldInCar(@PathVariable long id,
                                              @RequestParam(required = false, defaultValue = "") String mark,
                                              @RequestParam(required = false, defaultValue = "") String model,

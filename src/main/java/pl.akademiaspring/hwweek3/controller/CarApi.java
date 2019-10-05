@@ -18,7 +18,7 @@ public class CarApi {
         this.cars = new ArrayList<>();
         cars.add(new Car(1L, "Fiat", "Doblo", "Red"));
         cars.add(new Car(2L, "Volvo", "V90", "Grey"));
-        cars.add(new Car(3L, "Ford", "Mondeo", "White"));
+        cars.add(new Car(3L, "Ford", "Mondeo", "Red"));
     }
 
     @GetMapping
@@ -35,14 +35,14 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping("/{color}")
-//    public ResponseEntity<Car> getCarByColor(@PathVariable String color) {
-//        Optional<Car> first = cars.stream().filter(car -> car.getColor().equals(color)).findFirst();
-//        if (first.isPresent()) {
-//            return new ResponseEntity<>(first.get(), HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
+    @GetMapping
+    public ResponseEntity<List<Car>> getCarsByColor(@RequestHeader String color) {
+        Optional<Car> carsBycolor = cars.stream().filter(car -> car.getColor().equals(color));
+        if (carsBycolor.isPresent()) {
+            return new ResponseEntity<>(carsBycolor.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
     @PostMapping
     public ResponseEntity<Car> addCar(@RequestBody Car car) {
@@ -94,7 +94,6 @@ public class CarApi {
             }
             return new ResponseEntity<>(HttpStatus.OK);
          }
-//            return new ResponseEntity<>(HttpStatus.OK)
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

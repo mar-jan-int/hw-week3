@@ -17,9 +17,9 @@ public class CarApi {
 
     public CarApi() {
         this.cars = new ArrayList<>();
-        cars.add(new Car(1L, "Fiat", "Doblo", "Red"));
-        cars.add(new Car(2L, "Volvo", "V90", "Grey"));
-        cars.add(new Car(3L, "Ford", "Mondeo", "Red"));
+        cars.add(new Car(1L, "Fiat", "Doblo", "red"));
+        cars.add(new Car(2L, "Volvo", "V90", "grey"));
+        cars.add(new Car(3L, "Ford", "Mondeo", "red"));
     }
 
     @GetMapping
@@ -36,9 +36,11 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Car>> getCarsByColor(@RequestHeader String color) {
-        List<Car> carsByColor = cars.stream().filter(car -> car.getColor().equals(color)).collect(Collectors.toList());
+    @GetMapping("/color/{color}")
+    public ResponseEntity<List<Car>> getCarsByColor(@PathVariable String color) {
+        List<Car> carsByColor = cars.stream()
+                .filter(car -> car.getColor().equals(color))
+                .collect(Collectors.toList());
         if (carsByColor.size() > 0) {
             return new ResponseEntity<>(carsByColor, HttpStatus.OK);
         }
@@ -75,23 +77,24 @@ public class CarApi {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/{id}") //patch!!!
+    @PatchMapping("/{id}")
     public ResponseEntity<Car> modFieldInCar(@PathVariable long id,
                                              @RequestParam(required = false, defaultValue = "") String mark,
                                              @RequestParam(required = false, defaultValue = "") String model,
                                              @RequestParam(required = false, defaultValue = "") String color) {
         Optional<Car> first = cars.stream().filter(car -> car.getId() == id).findFirst();
         if (first.isPresent()) {
-            if (mark != "") {
+            if (!mark.equals("")) {
+
                 first.get().setMark(mark);
             }
 
-            if (model != "") {
-                first.get().setMark(model);
+            if (!model.equals("")) {
+                first.get().setModel(model);
             }
 
-            if (color != "") {
-                first.get().setMark(color);
+            if (!color.equals("")) {
+                first.get().setColor(color);
             }
             return new ResponseEntity<>(first.get(), HttpStatus.OK);
         }

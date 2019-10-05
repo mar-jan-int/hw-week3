@@ -8,6 +8,7 @@ import pl.akademiaspring.hwweek3.model.Car;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/cars")
@@ -37,9 +38,9 @@ public class CarApi {
 
     @GetMapping
     public ResponseEntity<List<Car>> getCarsByColor(@RequestHeader String color) {
-        Optional<Car> carsBycolor = cars.stream().filter(car -> car.getColor().equals(color));
-        if (carsBycolor.isPresent()) {
-            return new ResponseEntity<>(carsBycolor.get(), HttpStatus.OK);
+        List<Car> carsByColor = cars.stream().filter(car -> car.getColor().equals(color)).collect(Collectors.toList());
+        if (carsByColor.size() > 0) {
+            return new ResponseEntity<>(carsByColor, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -81,19 +82,19 @@ public class CarApi {
                                              @RequestParam(required = false, defaultValue = "") String color) {
         Optional<Car> first = cars.stream().filter(car -> car.getId() == id).findFirst();
         if (first.isPresent()) {
-            if(mark != ""){
+            if (mark != "") {
                 first.get().setMark(mark);
             }
 
-            if(model != ""){
+            if (model != "") {
                 first.get().setMark(model);
             }
 
-            if(color != "") {
+            if (color != "") {
                 first.get().setMark(color);
             }
-            return new ResponseEntity<>(HttpStatus.OK);
-         }
+            return new ResponseEntity<>(first.get(), HttpStatus.OK);
+        }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

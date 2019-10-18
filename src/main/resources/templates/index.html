@@ -1,26 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <meta charset="UTF-8">
     <title>Cars</title>
-    <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+<h1>Lista pojazdów</h1>
+<p/>
 <table>
     <thead>
     <tr>
-        <td>Name</td>
         <td>Mark</td>
+        <td>Model</td>
         <td>Color</td>
     </tr>
     </thead>
     <tbody>
     <tr th:each="car: ${cars}">
-        <td th:text="${car.getMark()}">Marka</td>
+        <td th:text="${car.getMark()}">Mark</td>
         <td th:text="${car.getModel()}">Model</td>
         <td th:text="${car.getColor()}">Color</td>
     </tr>
     </tbody>
 </table>
+
+<form th:action="@{/add}" th:object="${newCar}" method="post">
+    <p>Mark:<input type="text" th:field="*{mark}"></p>
+    <p>Model:<input type="text" th:field="*{model}"></p>
+    <p>Color:<input type="text" th:field="*{color}"></p>
+    <p><input type="submit" value="add new car"></p>
+</form>
 </body>
 </html>

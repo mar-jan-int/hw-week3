@@ -18,15 +18,16 @@ public class CarController {
     @GetMapping
     public String getCars(Model model) {
         model.addAttribute("cars", carService.getCars());
+        //model.addAttribute("newCar", carService.addCar(new Car));
         return "index";
     }
 
-    @GetMapping("/{id}")
-    public String getCarById(@PathVariable int id, Model model) {
-            Car car = carService.getCar(id);
-            model.addAttribute("car", car);
-        return "car";
-    }
+//    @GetMapping("/{id}")
+//    public String getCarById(@PathVariable int id, Model model) {
+//            Car car = carService.getCar(id);
+//            model.addAttribute("car", car);
+//        return "car";
+//    }
 //
 //    @GetMapping("/{color}")
 ////    public ResponseEntity<Car> getCarByColor(@PathVariable String color) {
@@ -37,14 +38,11 @@ public class CarController {
 ////        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 ////    }
 //
-//    @PostMapping
-//    public ResponseEntity<Car> addCar(@RequestBody Car car) {
-//        boolean add = cars.add(car);
-//        if (add) {
-//            return new ResponseEntity(HttpStatus.CREATED);
-//        }
-//        return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
+    @PostMapping("/add")
+    public String addCar(@ModelAttribute Car car) {
+        carService.addCar(car.getMark(), car.getModel(),car.getColor() );
+        return "redirect:/cars";
+    }
 //
 //    @PutMapping
 //    public ResponseEntity<Car> modCar(@RequestBody Car newCar) {

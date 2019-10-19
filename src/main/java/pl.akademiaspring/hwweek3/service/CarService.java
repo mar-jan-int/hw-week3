@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class CarService {
-    private static long count;
+    private static long count=3;
     private List<Car> cars;
 
 
@@ -17,7 +17,6 @@ public class CarService {
         cars.add(new Car(1L, "Fiat", "Doblo", "red"));
         cars.add(new Car(2L, "Volvo", "V90", "grey"));
         cars.add(new Car(3L, "Ford", "Mondeo", "red"));
-        count = 3;
     }
 
     public List<Car> getCars() {
@@ -32,7 +31,7 @@ public class CarService {
         return cars.get(id);
     }
 
-    public void addCar(String mark, String model, String color){
-        cars.add(new Car(count++, mark, model, color));
+    public void addCar(Car newCar){
+        cars.add(new Car(count++, newCar.getMark(), newCar.getModel(), newCar.getColor()));
     }
 }

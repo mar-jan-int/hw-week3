@@ -1,5 +1,6 @@
 package pl.akademiaspring.hwweek3.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -7,18 +8,18 @@ import pl.akademiaspring.hwweek3.model.Car;
 import pl.akademiaspring.hwweek3.service.CarService;
 
 @Controller
-@RequestMapping("/cars")
 public class CarController {
     private CarService carService;
 
+    @Autowired
     public CarController(CarService carService) {
         this.carService= carService;
     }
 
-    @GetMapping
+    @GetMapping("/cars")
     public String getCars(Model model) {
         model.addAttribute("cars", carService.getCars());
-        //model.addAttribute("newCar", carService.addCar(new Car));
+        model.addAttribute("newCar", new Car());
         return "index";
     }
 
@@ -39,8 +40,8 @@ public class CarController {
 ////    }
 //
     @PostMapping("/add")
-    public String addCar(@ModelAttribute Car car) {
-        carService.addCar(car.getMark(), car.getModel(),car.getColor() );
+    public String addCar(@ModelAttribute Car newCar) {
+        carService.addCar(newCar);
         return "redirect:/cars";
     }
 //
@@ -55,15 +56,15 @@ public class CarController {
 //        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 //    }
 //
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Car> removeCarById(@PathVariable long id) {
-//        Optional<Car> first = cars.stream().filter(car -> car.getId() == id).findFirst();
-//        if (first.isPresent()) {
-//            cars.remove(first.get());
-//            return new ResponseEntity<>(HttpStatus.OK);
-//        }
-//        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//    }
+    @DeleteMapping("/delete")
+    public void removeCarById(@ModelAttribute Car car) {
+        Optional<Car> first = cars.stream().filter(car -> car.getId() == id).findFirst();
+        if (first.isPresent()) {
+            cars.remove(first.get());
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 //
 //    @PutMapping("/{id}")
 //    public ResponseEntity<Car> modFieldInCar(@PathVariable long id,

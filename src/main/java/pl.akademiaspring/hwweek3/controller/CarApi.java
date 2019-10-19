@@ -57,7 +57,7 @@ public class CarApi {
     public ResponseEntity<Car> modCar(@RequestBody Car newCar) {
         Optional<Car> first = cars.stream().filter(car -> car.getId() == newCar.getId()).findFirst();
         if (first.isPresent()) {
-            cars.remove(first.get());
+            cars.remove(first.get());//to repair
             cars.add(newCar);
             return new ResponseEntity<>(first.get(), HttpStatus.OK);
         }

@@ -4,4 +4,19 @@ body{
     background: #ccc;
 	font-family: 'Raleway', sans-serif; 
 }
+.row{
+    width: 100%;
+}
+
+.col-1-1{
+    width: 20%;
+    padding: 10px;
+    float: left;
+}
+
+.col-1-2{
+    width: 47%;
+    padding: 10px;
+    float: left;
+}
 

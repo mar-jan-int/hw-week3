@@ -3,33 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Cars</title>
-    <link rel="stylesheet" href="./css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
 <h1>Lista pojazdów</h1>
 <p/>
-<table>
-    <thead>
-    <tr>
-        <td>Mark</td>
-        <td>Model</td>
-        <td>Color</td>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="car: ${cars}">
-        <td th:text="${car.getMark()}">Mark</td>
-        <td th:text="${car.getModel()}">Model</td>
-        <td th:text="${car.getColor()}">Color</td>
-    </tr>
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-1-1">
+        <table>
+            <thead>
+            <tr>
+                <td>Id</td>
+                <td>Mark</td>
+                <td>Model</td>
+                <td>Color</td>
+                <td>Delete</td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="car: ${cars}">
+                <td th:text="${car.getId()}">Id</td>
+                <td th:text="${car.getMark()}">Mark</td>
+                <td th:text="${car.getModel()}">Model</td>
+                <td th:text="${car.getColor()}">Color</td>
+                <td>
+                    <form action="#" th:action="@{'/delete/{id}'(id=${car.id})}" th:method="delete">
+<!--                        <input type="hidden" name="_method" value="delete"/>-->
+                        <button type="submit" id="submitDelete">Delete</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="#" th:action="@{'/cars/{id}'(id=${car.id})}" th:method="get">
+<!--                        <input type="hidden" name="_method" value="edit"/>-->
+                        <button type="submit" id="submitEdit">Edit</button>
+                    </form>
 
-<form th:action="@{/add}" th:object="${newCar}" method="post">
-    <p>Mark:<input type="text" th:field="*{mark}"></p>
-    <p>Model:<input type="text" th:field="*{model}"></p>
-    <p>Color:<input type="text" th:field="*{color}"></p>
-    <p><input type="submit" value="add new car"></p>
-</form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1-2">
+        <form th:action="@{/add}" th:object="${newCar}" method="post">
+            <p>Mark: <input type="text" th:field="*{mark}"></p>
+            <p>Model: <input type="text" th:field="*{model}"></p>
+            <p>Color: <input type="text" th:field="*{color}"></p>
+            <p><input type="submit" value="add new car"></p>
+        </form>
+    </div>
+</div>
 </body>
 </html>

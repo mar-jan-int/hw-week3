@@ -39,7 +39,7 @@ public class Car {
     }
 
     public void setMark(String mark) {
-        this.mark = model;
+        this.mark = mark;
     }
 
     public String getColor() {

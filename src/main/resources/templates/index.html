@@ -28,13 +28,12 @@
                 <td th:text="${car.getColor()}">Color</td>
                 <td>
                     <form action="#" th:action="@{'/delete/{id}'(id=${car.id})}" th:method="delete">
-<!--                        <input type="hidden" name="_method" value="delete"/>-->
+
                         <button type="submit" id="submitDelete">Delete</button>
                     </form>
                 </td>
                 <td>
                     <form action="#" th:action="@{'/cars/{id}'(id=${car.id})}" th:method="get">
-<!--                        <input type="hidden" name="_method" value="edit"/>-->
                         <button type="submit" id="submitEdit">Edit</button>
                     </form>
 

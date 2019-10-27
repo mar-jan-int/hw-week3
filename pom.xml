@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>pl.akademiaspring</groupId>
-	<artifactId>hw-week3</artifactId>
+	<artifactId>hw-week</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hw-week3</name>
+	<name>hw-week</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>

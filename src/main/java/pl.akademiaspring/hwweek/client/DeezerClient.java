@@ -32,7 +32,7 @@ public class DeezerClient {
 
         ResponseEntity<Artist[]> exchange = restTemplate.exchange("https://api.deezer.com/search/artist?q=eminem",
                 HttpMethod.GET,
-                httpEntity,
+                httpEntity.EMPTY,
                 Artist[].class);
 
     }

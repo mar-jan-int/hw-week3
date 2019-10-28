@@ -26,7 +26,7 @@ public class DeezerClient {
     public DeezerClient() {
         this.restTemplate = new RestTemplate();
     }
-    
+
     private void getArtist() {
         HttpEntity httpEntity = new HttpEntity(null);
 

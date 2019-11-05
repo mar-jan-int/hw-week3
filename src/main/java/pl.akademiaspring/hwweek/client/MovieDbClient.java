@@ -16,8 +16,8 @@ import java.util.stream.Stream;
 @Controller
 public class MovieDbClient {
     private RestTemplate restTemplate;
-    @Value("${api_key}")
-    private String api_key;
+    @Value("${movie-apikey}")
+    private String apiKey;
     private String year = "2018";
 
     public MovieDbClient() {
@@ -27,15 +27,15 @@ public class MovieDbClient {
 
     private void getMovie() {
         MultiValueMap<String, String> headers = new HttpHeaders();
-        headers.add("api_key", api_key);
+        headers.add("api_key", "592716b76d4ab222c069ecbc7423eb28");
         headers.add("primary_release_year", year);
         headers.add("sort_by", "vote_average.desc");
         HttpEntity httpEntity = new HttpEntity(headers);
 
-        ResponseEntity<ResultsItem[]> exchange = restTemplate.exchange("https://api.themoviedb.org/3/discover/movie",
+        ResponseEntity<MovieDb[]> exchange = restTemplate.exchange("https://api.themoviedb.org/3/discover/movie",
                 HttpMethod.GET,
                 httpEntity,
-                ResultsItem[].class);
+                MovieDb[].class);
 
         Stream.of(exchange.getBody()).forEach(System.out::println);
 

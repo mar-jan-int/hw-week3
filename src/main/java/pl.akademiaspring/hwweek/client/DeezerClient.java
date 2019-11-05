@@ -15,7 +15,7 @@ import pl.akademiaspring.hwweek.model.Artist;
 
 import java.util.stream.Stream;
 
-@Controller
+
 public class DeezerClient {
     private RestTemplate restTemplate;
 //    @Value("${x-rapidapi-key}")

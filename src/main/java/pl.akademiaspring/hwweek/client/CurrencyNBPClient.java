@@ -19,23 +19,18 @@ public class CurrencyNBPClient {
 
     public CurrencyNBPClient() {
         this.restTemplate = new RestTemplate();
-        getCurrency();
     }
 
-    private void getCurrency(){
-//        Currency currency = restTemplate.getForObject(
-//                "https://api.exchangeratesapi.io/latest?base=USD&symbols=PLN", Currency.class);
+    public List<Rate> getCurrencyTable(){
         HttpEntity httpEntity = new HttpEntity(null);
 
         ResponseEntity<Currency[]> exchange = restTemplate.exchange("http://api.nbp.pl/api/exchangerates/tables/A/",
                 HttpMethod.GET,
                 httpEntity.EMPTY,
                 Currency[].class);
+
         List<Rate> rates = new ArrayList<>();
         rates = exchange.getBody()[0].getRates();
-        for (Rate r: rates
-             ) {
-            System.out.println(r.getCurrency());
-        }
+        return rates;
     }
 }

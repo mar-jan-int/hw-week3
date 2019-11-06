@@ -11,6 +11,8 @@ import pl.akademiaspring.hwweek.model.Rate;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/nbp")
@@ -22,15 +24,32 @@ public class NbpApi {
         this.currencyNBPClient = currencyNBPClient;
     }
 
-    @GetMapping
-    public List<Rate> getCurrancyList() {
+    @GetMapping("/{code}")
+    public Boolean getRateByCode(@PathVariable String code) {
+        List<Rate> rates = getCurrancyAndRateList();
 
+        return rates.stream()
+                .findFirst()
+                .get()
+                .getCode()
+                .equals(code);
+
+    }
+
+    @GetMapping
+    public List<Rate> getCurrancyAndRateList() {
         List<Rate> currencies = currencyNBPClient.getCurrencyTable();
         return currencies;
     }
 
-    @GetMapping("/{currency}")
-    public BigDecimal getRateByCurrency(@PathVariable String currency) {
-    return null;
+    @GetMapping("/codes")
+    public List<String> getCurencyCodeList() {
+        List<String> codes = new ArrayList<>();
+        for (Rate rate : getCurrancyAndRateList()) {
+            codes.add(rate.getCode());
+        }
+        return codes;
     }
+
+
 }

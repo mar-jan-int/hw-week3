@@ -57,4 +57,10 @@ public class NbpApi {
         List<Rate> currencies = currencyNBPClient.getCurrencyTable();
         return currencies;
     }
+
+    @PostMapping("/check")
+    public void checkValue(@RequestBody String currency, @RequestBody String rate){
+        System.out.println(rate + " " + currency);
+
+    }
 }

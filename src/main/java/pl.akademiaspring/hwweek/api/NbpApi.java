@@ -1,6 +1,8 @@
 package pl.akademiaspring.hwweek.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.akademiaspring.hwweek.client.CurrencyNBPClient;
 import pl.akademiaspring.hwweek.model.Rate;
@@ -59,8 +61,7 @@ public class NbpApi {
     }
 
     @PostMapping("/check")
-    public void checkValue(@RequestBody String currency, @RequestBody String rate){
-        System.out.println(rate + " " + currency);
-
+    public ResponseEntity<String> checkRateValue(@RequestHeader("rate") BigDecimal rate) {
+        return new ResponseEntity<String>(HttpStatus.OK);
     }
 }

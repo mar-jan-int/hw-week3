@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <title> Currency game</title>
-</head>
-<body>
-<div class="form-group blu-margin">
-    <select class="form-control" th:field="${codes.getCurrencyCodeList()}"  id="code">
-        <option value="0">wybierz kod waluty</option>
-        <option th:each="kod : ${operators}" th:value="${operator.id}" th:text="${operator.operatorName}"></option>
-    </select>
-</div>
-</body>
-</html>
+
+<span th:fragment="game-page">
+<h1><span th:text = "'Wylosowano walutę: ' "></span></h1>
+<form th:action="@{/nbp/check}" th:object="${String}" method="get">
+    <p>Odpowiedź: <input type="text" th:field="*{toString()}"></p>
+</form>
+</span>
+

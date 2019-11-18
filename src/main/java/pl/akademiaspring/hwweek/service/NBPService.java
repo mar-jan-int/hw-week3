@@ -1,9 +1,13 @@
-package pl.akademiaspring.hwweek.api;
+package pl.akademiaspring.hwweek.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+<<<<<<< HEAD:src/main/java/pl.akademiaspring/hwweek/api/NbpApi.java
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+=======
+import org.springframework.stereotype.Service;
+>>>>>>> 3daed563be66b72e59c40fa16238360a59c7cc93:src/main/java/pl/akademiaspring/hwweek/service/NBPService.java
 import pl.akademiaspring.hwweek.client.CurrencyNBPClient;
 import pl.akademiaspring.hwweek.model.Rate;
 
@@ -11,22 +15,17 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
-import java.util.stream.Stream;
 
-@RestController
-@RequestMapping("/nbp")
-public class NbpApi {
+@Service
+public class NBPService {
     private CurrencyNBPClient currencyNBPClient;
-    private BigDecimal rateCurrency;
 
     @Autowired
-    public NbpApi(CurrencyNBPClient currencyNBPClient) {
+    NBPService(CurrencyNBPClient currencyNBPClient){
         this.currencyNBPClient = currencyNBPClient;
     }
 
-    @GetMapping("/randoms")
     public String getRandomCurrencyCode(){
         Random random =new Random();
         int currencyAmount = getCurrencyCodeList().size();
@@ -34,34 +33,38 @@ public class NbpApi {
         return currencyCode;
     }
 
-    @GetMapping("/codes")
     public List<String> getCurrencyCodeList() {
         List<String> codes = new ArrayList<>();
-        for (Rate rate : getCurrancyAndRateList()) {
+        for (Rate rate : getCurrencyAndRateList()) {
             codes.add(rate.getCode());
         }
         return codes;
     }
 
-    @GetMapping("/{code}")
-    public BigDecimal getRateByCode(@PathVariable String code) {
-        MathContext mathContext = new MathContext(5);
-          for (Rate rate : getCurrancyAndRateList()) {
+    public BigDecimal getRateByCode(String code) {
+        MathContext mathContext = new MathContext(3);
+        for (Rate rate : getCurrencyAndRateList()) {
             if(rate.getCode().equalsIgnoreCase(code)){
-                rateCurrency = new BigDecimal(rate.getMid(), mathContext);
+                return new BigDecimal(rate.getMid(), mathContext);
             }
         }
-        return rateCurrency;
+        return new BigDecimal(0);
     }
 
-    @GetMapping
-    public List<Rate> getCurrancyAndRateList() {
+    public List<Rate> getCurrencyAndRateList() {
         List<Rate> currencies = currencyNBPClient.getCurrencyTable();
         return currencies;
     }
 
+<<<<<<< HEAD:src/main/java/pl.akademiaspring/hwweek/api/NbpApi.java
     @PostMapping("/check")
     public ResponseEntity<String> checkRateValue(@RequestHeader("rate") BigDecimal rate) {
         return new ResponseEntity<String>(HttpStatus.OK);
+=======
+    public int compareCurrencyRateAndUserRate(String currencyCode, String rate){
+        BigDecimal rateByCode = getRateByCode(currencyCode);
+        return rateByCode.compareTo(new BigDecimal(rate));
+>>>>>>> 3daed563be66b72e59c40fa16238360a59c7cc93:src/main/java/pl/akademiaspring/hwweek/service/NBPService.java
     }
+
 }

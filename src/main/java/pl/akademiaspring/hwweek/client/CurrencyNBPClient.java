@@ -1,17 +1,16 @@
 package pl.akademiaspring.hwweek.client;
 
+import pl.akademiaspring.hwweek.model.Currency;
+import pl.akademiaspring.hwweek.model.Rate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.client.RestTemplate;
-import pl.akademiaspring.hwweek.model.Currency;
-import pl.akademiaspring.hwweek.model.Rate;
 
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Controller
 public class CurrencyNBPClient {

@@ -1,13 +1,10 @@
 package pl.akademiaspring.hwweek.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-<<<<<<< HEAD:src/main/java/pl.akademiaspring/hwweek/api/NbpApi.java
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-=======
 import org.springframework.stereotype.Service;
->>>>>>> 3daed563be66b72e59c40fa16238360a59c7cc93:src/main/java/pl/akademiaspring/hwweek/service/NBPService.java
 import pl.akademiaspring.hwweek.client.CurrencyNBPClient;
 import pl.akademiaspring.hwweek.model.Rate;
 
@@ -56,15 +53,12 @@ public class NBPService {
         return currencies;
     }
 
-<<<<<<< HEAD:src/main/java/pl.akademiaspring/hwweek/api/NbpApi.java
-    @PostMapping("/check")
     public ResponseEntity<String> checkRateValue(@RequestHeader("rate") BigDecimal rate) {
         return new ResponseEntity<String>(HttpStatus.OK);
-=======
+    }
+
     public int compareCurrencyRateAndUserRate(String currencyCode, String rate){
         BigDecimal rateByCode = getRateByCode(currencyCode);
         return rateByCode.compareTo(new BigDecimal(rate));
->>>>>>> 3daed563be66b72e59c40fa16238360a59c7cc93:src/main/java/pl/akademiaspring/hwweek/service/NBPService.java
     }
-
 }

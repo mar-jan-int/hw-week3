@@ -1,8 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+</head>
+<body>
+<h1>Wylosowano walutę:</h1>
+<p th:text="${currency}"></p>
+<!--<form th:action="@{/nbp/check}" th:object="${String}" method="get">-->
+<!--    <p>Odpowiedź: <input type="text" th:field="*{toString()}"></p>-->
+<!--</form>-->
+<!--</span>-->
 
-<span th:fragment="game-page">
-<h1><span th:text = "'Wylosowano walutę: ' "></span></h1>
-<form th:action="@{/nbp/check}" th:object="${String}" method="get">
-    <p>Odpowiedź: <input type="text" th:field="*{toString()}"></p>
-</form>
-</span>
-
+</body>
+</html>

@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
-@RequestMapping("/nbp")
+
 public class NbpApi {
     private NBPService nbpService;
     private int count = 0;
@@ -24,7 +24,7 @@ public class NbpApi {
         this.nbpService = nbpService;
     }
 
-    @GetMapping
+    @GetMapping("/nbp")
     public String getGame(Model model) {
         model.addAttribute("currency", nbpService.getRandomCurrencyCode());
         return "game";

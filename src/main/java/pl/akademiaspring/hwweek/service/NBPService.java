@@ -1,6 +1,9 @@
 package pl.akademiaspring.hwweek.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Service;
 import pl.akademiaspring.hwweek.client.CurrencyNBPClient;
 import pl.akademiaspring.hwweek.model.Rate;
@@ -50,9 +53,12 @@ public class NBPService {
         return currencies;
     }
 
+    public ResponseEntity<String> checkRateValue(@RequestHeader("rate") BigDecimal rate) {
+        return new ResponseEntity<String>(HttpStatus.OK);
+    }
+
     public int compareCurrencyRateAndUserRate(String currencyCode, String rate){
         BigDecimal rateByCode = getRateByCode(currencyCode);
         return rateByCode.compareTo(new BigDecimal(rate));
     }
-
 }

@@ -4,15 +4,16 @@ package pl.akademiaspring.hwweek.api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import pl.akademiaspring.hwweek.model.Rate;
 import pl.akademiaspring.hwweek.service.NBPService;
 
-import java.math.BigDecimal;
 import java.util.List;
 
-@RestController
+@Controller
+@RequestMapping("/nbp")
 
 public class NbpApi {
     private NBPService nbpService;
@@ -24,10 +25,11 @@ public class NbpApi {
         this.nbpService = nbpService;
     }
 
-    @GetMapping("/nbp")
+
+    @RequestMapping
     public String getGame(Model model) {
         model.addAttribute("currency", nbpService.getRandomCurrencyCode());
-        return "game";
+        return "game-header";
     }
 
     @GetMapping("/randoms")

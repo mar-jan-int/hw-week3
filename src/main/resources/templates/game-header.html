@@ -5,12 +5,12 @@
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<h1>Wylosowano walutę:</h1>
-<p th:text="${currency}"></p>
-<!--<form th:action="@{/nbp/check}" th:object="${String}" method="get">-->
+<h1>Wylosowano walutę: <input type="text"  th:text="${currency}"></h1>
+
+<!--<form th:action="@{/nbp/checks}" th:object="${String}" method="get">-->
 <!--    <p>Odpowiedź: <input type="text" th:field="*{toString()}"></p>-->
 <!--</form>-->
-<!--</span>-->
+
 
 </body>
 </html>

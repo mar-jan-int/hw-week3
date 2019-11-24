@@ -5,8 +5,14 @@
     <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<h1>Dostępne utwory wykonawcy w serwisie Deezer</h1>
+<form>
 
+</form>
+<h1>Znalezieni wykonawcy o tej nazwie w serwisie Deezer</h1>
+<tr th:each="album: ${albums}">
+    <td th:text="${album.getName()}"/><br>
+<!--    <td th:text="${album.getPicture()}"/>-->
+</tr>
 
 </body>
 </html>

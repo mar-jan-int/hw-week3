@@ -29,7 +29,7 @@ public class NbpApi {
     @RequestMapping
     public String getGame(Model model) {
         model.addAttribute("currency", nbpService.getRandomCurrencyCode());
-        return "game-header";
+        return "game";
     }
 
     @GetMapping("/randoms")

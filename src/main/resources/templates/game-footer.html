@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div th:fragment="footer">
+    <form th:action="@{/nbp/checks}" th:headers="${String}" method="get">
+        <p>Podaj kurs: <input type="text">
+            <input type="submit" value="sprawdź"></p>
+    </form>
+</div>
+</body>
+</html>

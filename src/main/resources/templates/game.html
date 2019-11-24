@@ -7,6 +7,10 @@
 <body>
 <h1>Wylosowano walutę: <input type="text"  th:text="${currency}"></h1>
 
+<div th:insert ="game-footer.html :: footer">
+</div>
+
+
 <!--<form th:action="@{/nbp/checks}" th:object="${String}" method="get">-->
 <!--    <p>Odpowiedź: <input type="text" th:field="*{toString()}"></p>-->
 <!--</form>-->

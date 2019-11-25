@@ -33,15 +33,4 @@ public class DeezerApi {
         model.addAttribute("albums", deezerClient.getDatum(artist));
         return "redirect: music";
     }
-//  @GetMapping
-//    public List<String> getAlbumsOfArtist(){
-//        List<String> albums = new ArrayList<>();
-//        List<Datum> datumList = deezerClient.getArtist().getData();
-//
-//        for (Datum datum: datumList) {
-//            albums.add(datum.getName());
-//        }
-//        return albums;
-//    }
-
 }

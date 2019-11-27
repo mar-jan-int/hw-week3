@@ -45,4 +45,15 @@ public class DeezerClient {
         datums = exchange.getBody().getData();
         return datums;
     }
+    public List<Datum> getDatum() {
+        List<Datum> datums = new ArrayList<>();
+        HttpEntity httpEntity = new HttpEntity(null);
+
+        ResponseEntity<Artist> exchange = restTemplate.exchange("https://api.deezer.com/search/artist?q=",
+                HttpMethod.GET,
+                httpEntity.EMPTY,
+                Artist.class);
+        datums = exchange.getBody().getData();
+        return datums;
+    }
 }

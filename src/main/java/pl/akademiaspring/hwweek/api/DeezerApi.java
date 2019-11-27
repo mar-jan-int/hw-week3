@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import pl.akademiaspring.hwweek.client.DeezerClient;
 import pl.akademiaspring.hwweek.model.Datum;
 
@@ -23,14 +25,15 @@ public class DeezerApi {
     }
 
     @GetMapping
-    public String getArtist(Model model) {
-        model.addAttribute("albums", deezerClient.getDatum(""));
+    public String getArtist(Model model, String artist) {
+        model.addAttribute("albums", deezerClient.getDatum());
         return "music";
     }
 
-    @GetMapping("/{artist}")
+    @PostMapping("/{artist}")
     public String getListOfArtist(@PathVariable("artist") String artist, Model model) {
+        System.out.println(artist);
         model.addAttribute("albums", deezerClient.getDatum(artist));
-        return "redirect: music";
+        return "music";
     }
 }

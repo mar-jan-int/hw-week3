@@ -2,26 +2,25 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pl">
 <head>
     <meta charset="UTF-8">
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link href="../static/css/style.css" th:href="@{/static/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-
-<form th:action="@{/deezer}" method="get">
-    <!--    <form th:action="@{/deezer}" th:headers="${String}" method="get">-->
-    <p>Podaj nazwę wykonawcy: <input name="artist" type="text">
-        <input type="submit" value="sprawdź"></p>
-</form>
-
-<h1>Znalezieni wykonawcy o tej nazwie w serwisie Deezer</h1>
+<h2>Znaleziono wykonawców o podanej nazwie w serwisie Deezer</h2>
 <table>
     <tr>
-        <th>Znalezieni wykonawcy o podanej nazwie</th>
+        <th>ID</th>
+        <th>Nazwa wykonawcy</th>
     </tr>
     <tr th:each="album: ${albums}">
+        <td th:text="${album.getId()}"/>
         <td th:text="${album.getName()}"/>
-        <br>
-        <!--    <td th:text="${album.getPicture()}"/>-->
     </tr>
 </table>
+
+<form th:action="@{'/deezer/{artist}'(artist=${albums})}" method="post">
+    <p>Podaj nazwę wykonawcy: <input th:id="albums" type="text">
+        <input type="submit" value="Znajdź"></p>
+</form>
+
 </body>
 </html>

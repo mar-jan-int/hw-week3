@@ -25,15 +25,15 @@ public class DeezerApi {
     }
 
     @GetMapping
-    public String getArtist(Model model, String artist) {
-        model.addAttribute("albums", deezerClient.getDatum());
+    public String getArtist(Model model) {
+        model.addAttribute("albums", deezerClient.getDatum(""));
         return "music";
     }
 
-    @PostMapping("/{artist}")
+    @GetMapping("/{artist}")
     public String getListOfArtist(@PathVariable("artist") String artist, Model model) {
-        System.out.println(artist);
         model.addAttribute("albums", deezerClient.getDatum(artist));
+        model.addAttribute("artist", artist);
         return "music";
     }
 }

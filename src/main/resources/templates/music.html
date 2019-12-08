@@ -5,7 +5,7 @@
     <link href="../static/css/style.css" th:href="@{/static/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
-<form th:action="@{/deezer/${artist}}" method="get">
+<form th:action="@{/deezer/'${artist}'}" method="get">
     <p>Podaj nazwę wykonawcy: <input th:field="*{artist}" type="text">
         <input type="submit" value="Znajdź"></p>
 </form>

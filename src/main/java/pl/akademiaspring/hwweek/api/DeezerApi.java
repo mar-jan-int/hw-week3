@@ -5,14 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import pl.akademiaspring.hwweek.client.DeezerClient;
-import pl.akademiaspring.hwweek.model.Datum;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 @RequestMapping("/deezer")
@@ -26,7 +20,7 @@ public class DeezerApi {
 
     @GetMapping
     public String getArtist(Model model) {
-        model.addAttribute("albums", deezerClient.getDatum(""));
+        model.addAttribute("albums", deezerClient.getDatum());
         return "music";
     }
 
@@ -37,3 +31,13 @@ public class DeezerApi {
         return "music";
     }
 }
+
+//    @PostMapping("/postEndpoint")
+//    public String pidUserSubmit(@RequestParam(name = "myid") String myid) {
+//        log.debug("*** MY ID: {}", myid);
+//        return "redirect:/someOtherPage";
+//    }
+
+//<form th:action="@{/postEndpoint}" th:object="${mymodelobject}">
+//<input name="myid" type="text" th:value="*{myid}">
+//</form>
